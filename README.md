@@ -1,4 +1,5 @@
-# LionAuction aims to represent an e-commerce website that allows users to bid on on products and for sellers to be able to put up items for bidding.
+# LionAuction is an e-commerce website
+It will allow both buyers and sellers to interact through the bidding on various goods.
 So far, the logic for user login and database population for users has been implemented. 
 Additionally, the original passwords have been removed and replaced with the hashes of the passwords. 
 Currently, the website routes initially to index.html, which will prompt the user to login. 
