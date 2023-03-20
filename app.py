@@ -27,12 +27,30 @@ def login():
 
 def valid_login(user_name, password_in):
     connection = sql.connect('database.db')
-    cursor = connection.execute(f'SELECT * FROM users WHERE username=? AND password=?;',(user_name, password_in))
+    #cursor = connection.execute('SELECT * FROM users WHERE username=? AND hashedpass=?;',(user_name, sha256_crypt.hash(password_in)))
+    cursor = connection.execute('SELECT * FROM users WHERE username=?;', (user_name,))
     connection.commit()
-    return cursor.fetchall()
+    try:
+        hashedPassword = cursor.fetchone()[1]
+        isMatch = sha256_crypt.verify(password_in, hashedPassword)
+    except:
+        isMatch = None
+    return isMatch
 
-def hash_passwords(password):
-    hash = sha256_crypt.hash(password)
+def hash_passwords():
+    connection = sql.connect('database.db')
+    cursor = connection.cursor()
+    cursor2 = connection.cursor()
+    # Fetch all passwords
+    passwords = cursor.execute('SELECT * FROM users;').fetchall()
+    for passw in passwords:
+        rowPassword = passw[1]
+        hashedPassword = sha256_crypt.hash(rowPassword)
+        cursor2.execute('UPDATE users SET hashedpass=? WHERE password=?;', (hashedPassword, rowPassword))
+    connection.commit()
+    connection.close()
+
+
 
 
 
