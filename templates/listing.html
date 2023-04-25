@@ -37,21 +37,43 @@
 
 
 <div class="header">
-        <h1>Subcategories</h1>
+        <h1>Categories</h1>
             <div class="container">
         <div class="card">
-               <div class="card-body">
-                    <ul class="list-group">
-                    <form method="POST" action="/listing">
-                        <select name="subcategory">
-                        {% for item in subcategories %}
-                            <li><option subcategory="{{ item }}">{{ item }}</option></li>
-                        {% endfor %}
-                        </select>
-                        <input type="submit" value="Submit">
+                <div class="card-body">
+                    <table class="table table-dark">
+            <tr>
+                <th scope="col">Auction Title</th>
+                <th scope="col">Product</th>
+                <th scope="col">Description</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Status</th>
+            </tr>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                    <form method="POST" action="/bid">
+                        <input type="hidden" name="lid" value="{{ item[1] }}">
+                        <input class="bid-button" type="submit" value="{{ item[3] }}">
                     </form>
-                    </ul>
-                   <a href="/categories"> <button type="button" name="login_button" class="btn btn-primary">Go Back</button> </a>
+                    </td>
+                    <td> {{ item[4] }} </td>
+                    <td> {{ item[5] }} </td>
+                    <td> {{ item[6] }} </td>
+                    <td> {% if item[9] == 1 %}
+                            Available
+                        {% elif item[9] == 2 %}
+                            Sold
+                        {% else %}
+                            Unavailable
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+                <a href="/categories"> <button type="button" name="login_button" class="btn btn-primary">Back</button> </a>
                 </div>
         </div>
     </div>

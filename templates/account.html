@@ -36,6 +36,9 @@
     </nav>
 
 <div class="header">
+    {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
         <h1>Account information</h1>
 
     </div>
@@ -59,11 +62,24 @@
                         <p>Account Number: {{  bankInfo[2] }}</p>
                         <p>Balance: {{ bankInfo[3] }}</p>
                     {% endif %}
+                <form action="/home" method="POST">
+                        <div class="form-group">
+                            <label for="role"> Switch Role:</label>
+                            <select id="role" name="role" class="form-control">
+                                <option value="bidder">Bidder</option>
+                                <option value="seller">Seller</option>
+                                <option value="helpdesk">HelpDesk</option>
+                            </select>
+                            <button type="submit" name="login_button" class="btn btn-primary" >Switch</button>
+                        </div>
+
+
+
+                    </form>
                 </div>
+
         </div>
-    </div>
-    <div class="footer">
-        <p>&copy; 2023 Lion Auction</p>
+
     </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

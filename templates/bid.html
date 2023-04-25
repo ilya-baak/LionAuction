@@ -35,26 +35,32 @@
         </div>
     </nav>
 
-
 <div class="header">
-        <h1>Subcategories</h1>
+        <h1>{{ itemData[3] }}</h1>
             <div class="container">
         <div class="card">
-               <div class="card-body">
-                    <ul class="list-group">
-                    <form method="POST" action="/listing">
-                        <select name="subcategory">
-                        {% for item in subcategories %}
-                            <li><option subcategory="{{ item }}">{{ item }}</option></li>
-                        {% endfor %}
-                        </select>
-                        <input type="submit" value="Submit">
-                    </form>
-                    </ul>
-                   <a href="/categories"> <button type="button" name="login_button" class="btn btn-primary">Go Back</button> </a>
-                </div>
+                <div class="card-body">
+    <p><strong>Category:</strong> {{ itemData[2] }}</p>
+    <p><strong>Product Name:</strong> {{ itemData[4] }}</p>
+    <p><strong>Product Description:</strong> {{ itemData[5] }}</p>
+    <p><strong>Quantity:</strong> {{ itemData[6] }}</p>
+    <p><strong>Max Bids:</strong> {{ itemData[8] }}</p>
+    <hr>
+    <h3>Bidding Information:</h3>
+    {% if bidData %}
+        <ul>
+        {% for bid in bidData %}
+            <li>Bidder: {{ bid[3] }} - Price: {{ bid[4] }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bids have been placed yet.</p>
+    {% endif %}
+</div>
+
         </div>
     </div>
     </div>
+
 </body>
 </html>
