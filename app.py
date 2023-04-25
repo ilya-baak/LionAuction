@@ -13,6 +13,31 @@ host = 'http://127.0.0.1:5000/'
 def index():
     return render_template('index.html')
 
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    message = None
+    if request.method == "POST":
+        # Acquire user + pass from form
+        username = request.form['UserName']
+        password = request.form['Password']
+
+        connection = sql.connect('database.db')
+        cursor = connection.execute('SELECT * FROM users WHERE username=?;', (username,))
+        exists = cursor.fetchone()
+
+        if exists:
+            message = 'Invalid username: username already taken'
+            return render_template('register.html', message=message)
+        hashedpass = sha256_crypt.hash(password)
+        cursor = connection.cursor()
+        cursor.execute('INSERT INTO users(username, password) VALUES (?,?);', (username, hashedpass))
+        message = 'Account created successfully. Login below.'
+        return render_template('login.html', message=message)
+
+    return render_template('register.html')
+
+def search():
+    pass
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -21,7 +46,6 @@ def login():
         # Acquire user + pass from form
         username = request.form['UserName']
         password = request.form['Password']
-
         # Store role to determine priveledges
         role = request.form['role']
         # Used to remember current user across pages
@@ -191,7 +215,6 @@ def support():
     # Change username request
     if role == 'user':
         pass
-
     # Add category request
     elif role == 'seller':
         if request.method == 'POST':
