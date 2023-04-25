@@ -1,50 +1,7 @@
-DELETE FROM users WHERE firstname = 'Markus';
-DELETE FROM users WHERE firstname = 'Jay';
-
-DELETE FROM users WHERE firstname = 'email';
-
-ALTER TABLE users RENAME COLUMN firstname TO username;
-ALTER TABLE users RENAME COLUMN lastname TO password;
-
-ALTER TABLE users ADD COLUMN hashedpass
-
-
-SELECT hashedpass FROM users WHERE username='arubertelli0@nsu.edu';
-
-ALTER TABLE users DROP COLUMN password;
-
-ALTER TABLE users RENAME COLUMN hashedpass TO password;
-
-SELECT sql FROM sqlite_master WHERE type='table' AND name='users';
-
-CREATE TABLE users2 (username TEXT PRIMARY KEY,
-                     password TEXT
-
-);
-
-INSERT INTO users2(username, password) SELECT username, password FROM users;
-
-DROP TABLE users;
-
-ALTER TABLE users2 RENAME TO users;
-
-DROP TABLE users2;
-
-ALTER TABLE users DROP COLUMN password;
-
-ALTER TABLE users RENAME COLUMN hashedpass TO password;
-
-
 --Schema start--
-CREATE TABLE users (username TEXT PRIMARY KEY,
-                     password TEXT
-
-);
+CREATE TABLE users (username TEXT PRIMARY KEY, password TEXT);
 
 CREATE TABLE helpdesk (username TEXT PRIMARY KEY, position TEXT);
-
-ALTER TABLE helpdesk RENAME TO HelpDesk;
-Alter TABLE helpdesk RENAME COLUMN username TO email;
 
 CREATE TABLE Requests (
     request_id INTEGER PRIMARY KEY,
@@ -70,7 +27,7 @@ CREATE TABLE Bidder (
     age INTEGER,
     home_address_id HEX,
     major TEXT,
-    FOREIGN KEY(home_address_id) REFERENCES Addresses(address_id)
+    FOREIGN KEY(home_address_id) REFERENCES Address(address_id)
 );
 
 CREATE TABLE Zipcode_Info (
@@ -86,7 +43,7 @@ CREATE TABLE Credit_Cards (
     expire_year INTEGER,
     security_code TEXT,
     Owner_email TEXT,
-    FOREIGN KEY(Owner_email) REFERENCES Bidders(email)
+    FOREIGN KEY(Owner_email) REFERENCES Bidder(email)
 );
 
 CREATE TABLE Seller (
@@ -94,7 +51,7 @@ CREATE TABLE Seller (
     bank_routing_number TEXT,
     bank_account_number TEXT,
     balance REAL,
-    FOREIGN KEY(email) REFERENCES Bidders(email)
+    FOREIGN KEY(email) REFERENCES Bidder(email)
 );
 
 CREATE TABLE Local_Vendors (
@@ -102,7 +59,7 @@ CREATE TABLE Local_Vendors (
     business_name TEXT,
     business_address_id HEX,
     customer_service_phone_number TEXT,
-    FOREIGN KEY(email) REFERENCES Sellers(email),
+    FOREIGN KEY(email) REFERENCES Seller(email),
     FOREIGN KEY(business_address_id) REFERENCES Address(address_id)
 );
 
@@ -125,7 +82,7 @@ CREATE TABLE Auction_Listings (
     Max_bids INTEGER,
     Status INTEGER DEFAULT 1,
     PRIMARY KEY (Seller_Email, Listing_ID),
-    FOREIGN KEY (Seller_Email) REFERENCES Sellers(Email)
+    FOREIGN KEY (Seller_Email) REFERENCES Seller(Email)
 );
 
 CREATE TABLE Bids (
@@ -154,8 +111,6 @@ CREATE TABLE Rating (
     Rating INTEGER NOT NULL,
     Rating_Desc TEXT NOT NULL,
     PRIMARY KEY (Bidder_Email, Seller_Email, Date),
-    FOREIGN KEY (Bidder_Email) REFERENCES Bidders(email),
-    FOREIGN KEY (Seller_Email) REFERENCES Sellers(email)
+    FOREIGN KEY (Bidder_Email) REFERENCES Bidder(email),
+    FOREIGN KEY (Seller_Email) REFERENCES Seller(email)
 );
-
-

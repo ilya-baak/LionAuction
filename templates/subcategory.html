@@ -9,9 +9,9 @@
     <title>Lion Auction</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">Lion Auction</a>
+            <a class="navbar-brand" href="/home">Lion Auction</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,39 +19,42 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/home" >Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Categories</a>
+                        <a class="nav-link" href="/account">Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="header">
-        <h1>Welcome to Lion Auction</h1>
-        <p>The place where you can find great deals on everything from apparels to electronics!</p>
-        <a class="btn btn-success btn-lg" href="/login" role="button">Login here!</a>
-    </div>
-    <div class="container">
-        <!-- Insert content here -->
-    </div>
-    <div class="footer">
-        <p>&copy; 2023 Lion Auction</p>
-    </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<div class="header">
+        <h1>Subcategories</h1>
+            <div class="container">
+        <div class="card">
+               <div class="card-body">
+                    <ul class="list-group">
+                    <form method="POST" action="/bid">
+                        <select name="category">
+                        {% for item in subcategories %}
+                            <li><option subcategory="{{ item }}">{{ item }}</option></li>
+                        {% endfor %}
+                        </select>
+                        <input type="submit" value="Submit">
+                    </form>
+                    </ul>
+                   <a href="/categories"> <button type="button" name="login_button" class="btn btn-primary">Go Back</button> </a>
+                </div>
+        </div>
+    </div>
+    </div>
 </body>
 </html>

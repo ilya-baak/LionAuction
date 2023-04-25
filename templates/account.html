@@ -9,9 +9,9 @@
     <title>Lion Auction</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">Lion Auction</a>
+            <a class="navbar-brand" href="/home">Lion Auction</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,26 +19,48 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/home" >Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Categories</a>
+                        <a class="nav-link" href="/categories">Categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="header">
-        <h1>Welcome to Lion Auction</h1>
-        <p>The place where you can find great deals on everything from apparels to electronics!</p>
-        <a class="btn btn-success btn-lg" href="/login" role="button">Login here!</a>
+<div class="header">
+        <h1>Account information</h1>
+
     </div>
     <div class="container">
-        <!-- Insert content here -->
+        <div class="card">
+                <div class="card-body">
+                    {% if position %}
+                        <p>HelpDesk Position: {{ position[1] }}</p>
+                    {% endif %}
+                    <p>Username: {{ info[0] }}</p>
+                    <p>Name: {{ info[1] }} {{ info[2] }}</p>
+                    <p>Gender: {{ info[3] }}</p>
+                    <p>Age: {{ info[4] }}</p>
+                    <p>Major: {{ info[6] }}</p>
+                    <p>Billing address: {{ address[2] }} {{ address[3] }} {{ zip[1] }}, {{ zip[2] }}, {{ zip[0] }}</p>
+                    <p>Credit Card: ****-****-****-{{ digits }}</p>
+                    <br>
+                    {% if bankInfo %}
+                    <p>Banking information: </p>
+                        <p>Routing: {{ bankInfo[1] }}</p>
+                        <p>Account Number: {{  bankInfo[2] }}</p>
+                        <p>Balance: {{ bankInfo[3] }}</p>
+                    {% endif %}
+                </div>
+        </div>
     </div>
     <div class="footer">
         <p>&copy; 2023 Lion Auction</p>
