@@ -43,6 +43,9 @@ CREATE TABLE users (username TEXT PRIMARY KEY,
 
 CREATE TABLE helpdesk (username TEXT PRIMARY KEY, position TEXT);
 
+ALTER TABLE helpdesk RENAME TO HelpDesk;
+Alter TABLE helpdesk RENAME COLUMN username TO email;
+
 CREATE TABLE Requests (
     request_id INTEGER PRIMARY KEY,
     sender_email TEXT,
@@ -59,7 +62,7 @@ CREATE TABLE Address (
     street_name TEXT
 );
 
-CREATE TABLE Bidders (
+CREATE TABLE Bidder (
     email TEXT PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
@@ -69,7 +72,6 @@ CREATE TABLE Bidders (
     major TEXT,
     FOREIGN KEY(home_address_id) REFERENCES Addresses(address_id)
 );
-
 
 CREATE TABLE Zipcode_Info (
     zipcode TEXT PRIMARY KEY,
@@ -87,7 +89,7 @@ CREATE TABLE Credit_Cards (
     FOREIGN KEY(Owner_email) REFERENCES Bidders(email)
 );
 
-CREATE TABLE Sellers (
+CREATE TABLE Seller (
     email TEXT PRIMARY KEY,
     bank_routing_number TEXT,
     bank_account_number TEXT,

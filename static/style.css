@@ -1,0 +1,59 @@
+body {
+            background-color: #F7F7F7;
+            background-image: url('lbg.jpg');
+        }
+
+
+        .navbar {
+            font-family: 'Lato', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #007BFF !important;
+            }
+
+        .navbar-brand {
+            color: #007BFF !important;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            font-size: 18px;
+            color: #007BFF !important;
+        }
+
+        .header {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .card-body {
+            color: white;
+            background-color: #007BFF;
+        }
+
+        .form-group .btn-primary[name="login_button"] {
+            background-color: #4e709c;
+        }
+
+        .header .btn-success {
+            background-color: #4e709c;
+        }
+
+        .btn-success:hover {
+            background-color: #2bb1e2 !important;
+            }
