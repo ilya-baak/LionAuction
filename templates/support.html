@@ -25,7 +25,7 @@
                         <a class="nav-link" href="/account">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/support">Support</a>
+                        <a class="nav-link" href="/categories">Categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/">Logout</a>
@@ -37,43 +37,57 @@
 
 
 <div class="header">
-        <h1>Categories</h1>
+        {% if role == 'helpdesk' %}
+            <h1>Tickets</h1>
             <div class="container">
         <div class="card">
                 <div class="card-body">
                     <table class="table table-dark">
             <tr>
-                <th scope="col">Auction Title</th>
-                <th scope="col">Product</th>
+                <th scope="col">ID</th>
+                <th scope="col">Requested by</th>
+                <th scope="col">Staff Requested</th>
+                <th scope="col">Type</th>
                 <th scope="col">Description</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Status</th>
+                <th scope="col">status</th>
+
             </tr>
             <tbody>
-            {% for item in items %}
-                <tr>
-                    <td>
-                    <form method="POST" action="/bid">
-                        <input type="hidden" name="lid" value="{{ item[1] }}">
-                        <input class="bid-button" type="submit" value="{{ item[3] }}">
-                    </form>
-                    </td>
-                    <td> {{ item[4] }} </td>
-                    <td> {{ item[5] }} </td>
-                    <td> {{ item[6] }} </td>
-                    <td> {% if item[9] == 1 %}
-                            Available
-                        {% elif item[9] == 2 %}
-                            Sold
-                        {% else %}
-                            Unavailable
-                        {% endif %}
-                    </td>
+            {% for ticket in tickets %}
+                <tr><td>{{ ticket[0] }}</td>
+                    <td>{{ ticket[1] }}</td>
+                <td>{{ ticket[2] }}</td>
+                <td>{{ ticket[3] }}</td>
+                <td>{{ ticket[4] }}</td>
+                <td>{{ ticket[5] }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-                <a href="/categories"> <button type="button" name="login_button" class="btn btn-primary">Back</button> </a>
+                {% elif role == 'seller' %}
+    <h1>Request Support</h1>
+    <form method="POST" action="{{ url_for('support') }}">
+        <div class="form-group">
+            <label for="request_type">Request Type:</label>
+            <input type="text" class="form-control" id="request_type" name="request_type">
+        </div>
+        <div class="form-group">
+            <label for="request_description">Request Description:</label>
+            <textarea class="form-control" id="request_description" name="request_description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="helpdesk_user">Helpdesk User:</label>
+            <select class="form-control" id="helpdesk_user" name="helpdesk_user">
+                {% for user in helpdesk_users %}
+                    <option value="{{ user[0] }}">{{ user[0] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endif %}
+
+                <a href="/home"> <button type="button" name="login_button" class="btn btn-primary">Back</button> </a>
                 </div>
         </div>
     </div>

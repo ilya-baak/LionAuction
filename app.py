@@ -61,7 +61,6 @@ def valid_login(user_name, password_in, role):
         isMatch = None
     return isMatch
 
-
 @app.route('/home', methods=['POST', 'GET'])
 def home():
     user = session.get('username')
@@ -180,6 +179,35 @@ def bid():
     bidData = connection.execute('SELECT * FROM Bids WHERE Listing_ID=?;', (lid,)).fetchall()
     itemData = connection.execute('SELECT * FROM Auction_Listings WHERE Listing_ID=?;', (lid,)).fetchone()
     return render_template('bid.html', bidData=bidData, itemData=itemData)
+
+# Provides a means to send support tickets to helpdesk
+@app.route('/support', methods=['POST', 'GET'])
+def support():
+    user = session.get('username')
+    role = session.get('role')
+    connection = sql.connect('database.db')
+    helpdesk_users= connection.execute('SELECT * FROM helpdesk;').fetchall()
+
+    # Change username request
+    if role == 'user':
+        pass
+
+    # Add category request
+    elif role == 'seller':
+        if request.method == 'POST':
+            huser = request.form.get('helpdesk_user')
+            reqtype = request.form.get('request_type')
+            reqdesc = request.form.get('request_description')
+            connection.execute('INSERT INTO Requests(sender_email, helpdesk_staff_email, request_type, request_desc, request_status) VALUES (?,?,?,?,?);',
+                                            (user, huser, reqtype,reqdesc, 0))
+            connection.commit()
+        return render_template('support.html', role=role, helpdesk_users=helpdesk_users)
+
+    elif role == 'helpdesk':
+        tickets = connection.execute('SELECT * FROM Requests;')
+        return render_template('support.html', tickets=tickets, role=role, user=user)
+
+    return render_template('support.html')
 
 if __name__ == "__main__":
     app.run()
