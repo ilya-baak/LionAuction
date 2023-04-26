@@ -1,10 +1,15 @@
 # Lion Auction
-As an e-commerce website, Lion Auction will allow both buyers and sellers to interact through the bidding on various goods.
+
 ![2023-04-26 (2)](https://user-images.githubusercontent.com/88633824/234718757-dd7c732d-7de6-405a-98cc-ec3e4d445afb.png)
+
+As an e-commerce website, Lion Auction will allow both buyers and sellers to interact through the bidding on various goods.
 
 
 In login.html, the user is asked to input their username and password, and will notify them if given an invalid login.
 When the user inputs their password, it is compared against using the hashed password in the data base. 
+
+![2023-04-26 (4)](https://user-images.githubusercontent.com/88633824/234719016-9d5f4bcb-6f98-44f3-8431-36175e91e389.png)
+
 This is done using the passlib.hash library, and the SHA-256 algorithm is used for the hashing.
 Upon successful login, the user is taken to the homepage of LionAuction.
 
