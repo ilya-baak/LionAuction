@@ -1,5 +1,6 @@
 # Lion Auction
 As an e-commerce website, Lion Auction will allow both buyers and sellers to interact through the bidding on various goods.
+![2023-04-26 (2)](https://user-images.githubusercontent.com/88633824/234718757-dd7c732d-7de6-405a-98cc-ec3e4d445afb.png)
 
 
 In login.html, the user is asked to input their username and password, and will notify them if given an invalid login.
